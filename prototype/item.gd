@@ -12,10 +12,10 @@ var item_hitbox_radius: float
 func _on_detection_body_entered(body: Node2D) -> void:
 	print(self)
 	if body is Player:
-		print('player entered item radius with id {item_id}')
+		print('player entered item radius with id %d' % item_id)
 		player_entered_item_radius.emit(self)
 
 func _on_detection_body_exited(body: Node2D) -> void:
 	if body is Player:
-		print('player left item radius with id {item_id}')
+		print('player left item radius with id %d' % item_id)
 		player_left_item_radius.emit(self)
