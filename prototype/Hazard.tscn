@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://btgi35me10fdc"]
+
+[ext_resource type="Script" path="res://prototype/hazard.gd" id="1_odlp5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nijo"]
+size = Vector2(64, 16)
+
+[node name="Hazard" type="Node2D"]
+script = ExtResource("1_odlp5")
+
+[node name="HazardArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_5nijo")
+debug_color = Color(1, 0, 0.0999999, 0.239216)
+
+[connection signal="body_entered" from="HazardArea" to="." method="_on_hazard_area_body_entered"]

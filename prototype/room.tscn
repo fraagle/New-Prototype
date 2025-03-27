@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0saeen2xcnxu"]
+
+[ext_resource type="Script" path="res://prototype/room.gd" id="1_jc8l4"]
+[ext_resource type="PackedScene" uid="uid://dcsy4mw12c1kj" path="res://prototype/door.tscn" id="2_iscy4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apwbb"]
+size = Vector2(576, 448)
+
+[node name="Room" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_jc8l4")
+
+[node name="RoomArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea"]
+position = Vector2(288, 224)
+shape = SubResource("RectangleShape2D_apwbb")
+debug_color = Color(0.364322, 0.3081, 0.79, 0.0745098)
+
+[node name="DoorRight" parent="." instance=ExtResource("2_iscy4")]
+position = Vector2(568, 352)
+
+[node name="DoorLeft" parent="." instance=ExtResource("2_iscy4")]
+position = Vector2(8, 352)
+rotation = 3.14159
+
+[node name="DoorBottom" parent="." instance=ExtResource("2_iscy4")]
+position = Vector2(288, 440)
+rotation = 1.5708
+bottom_door = true
+
+[node name="DoorTop" parent="." instance=ExtResource("2_iscy4")]
+position = Vector2(288, 8)
+rotation = -1.5708
+top_door = true
+
+[connection signal="body_entered" from="RoomArea" to="." method="_on_room_area_body_entered"]

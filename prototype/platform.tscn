@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvl5qll0fu6c7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jr7j7"]
+size = Vector2(40, 8)
+
+[node name="platform" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_jr7j7")
+one_way_collision = true

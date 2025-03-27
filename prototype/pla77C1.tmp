@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://w0s4ynlfeey5"]
+
+[ext_resource type="Script" path="res://prototype/player.gd" id="1_aekyd"]
+[ext_resource type="Resource" uid="uid://bi5tnesh51itq" path="res://prototype/DefaultPlayerMovementData.tres" id="2_f3fyt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ikvsx"]
+height = 32.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_aekyd")
+movement_data = ExtResource("2_f3fyt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_ikvsx")
+debug_color = Color(4.62055e-06, 0.595816, 0.723473, 0.42)
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

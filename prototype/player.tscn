@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://w0s4ynlfeey5"]
+
+[ext_resource type="Script" path="res://prototype/player.gd" id="1_aekyd"]
+[ext_resource type="Resource" uid="uid://bi5tnesh51itq" path="res://prototype/DefaultPlayerMovementData.tres" id="2_f3fyt"]
+[ext_resource type="Script" path="res://prototype/dink_hit_box.gd" id="3_1h56b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmeka"]
+size = Vector2(16, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8sf76"]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(0, -8)
+collision_layer = 2
+script = ExtResource("1_aekyd")
+movement_data = ExtResource("2_f3fyt")
+enable_jump = true
+enable_walking = true
+enable_jump_buffer = true
+print_movement = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_fmeka")
+debug_color = Color(4.62055e-06, 0.595816, 0.723473, 0.42)
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="WallJumpTimer" type="Timer" parent="."]
+wait_time = 0.09
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="WallSlideTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DinkHitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("3_1h56b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DinkHitBox"]
+shape = SubResource("CircleShape2D_8sf76")
+debug_color = Color(0.730446, 0.465251, 0.239751, 0.42)
+
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="WallSlideTimer" to="." method="_on_wall_slide_timer_timeout"]
+[connection signal="body_entered" from="DinkHitBox" to="DinkHitBox" method="_on_body_entered"]

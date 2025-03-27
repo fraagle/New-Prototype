@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PlayerMovementData" load_steps=2 format=3 uid="uid://bi5tnesh51itq"]
+
+[ext_resource type="Script" path="res://prototype/PlayerMovementData.gd" id="1_ehden"]
+
+[resource]
+script = ExtResource("1_ehden")
+gravity_scale = 1.2
+speed = 150.0
+acceleration = 1000.0
+friction = 1100.0
+jump_velocity = -400.0
+air_velocity = 200.0
+wall_jump_velocity_x = 300.0
+air_acceleration = 700.0
+air_resistance = 50
+slide_velocity = 60.0
+dash_speed = 300.0
+dink_speed = 500.0
+grapple_speed = 1000.0

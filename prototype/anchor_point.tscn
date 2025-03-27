@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvonkjhjvvbmf"]
+
+[ext_resource type="Script" path="res://prototype/anchor_point.gd" id="1_xs3st"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfyit"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5l0uq"]
+radius = 64.4981
+
+[node name="AnchorPoint" type="StaticBody2D"]
+script = ExtResource("1_xs3st")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sfyit")
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("CircleShape2D_5l0uq")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

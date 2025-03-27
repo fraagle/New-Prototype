@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv4f7le2gfyw8"]
+
+[ext_resource type="Script" path="res://prototype/grapple.gd" id="1_irnnf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_os3c8"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ap0nd"]
+radius = 128.0
+
+[node name="Grapple" type="StaticBody2D"]
+script = ExtResource("1_irnnf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_os3c8")
+disabled = true
+debug_color = Color(0.547096, 0.531502, 0.531247, 0.42)
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("CircleShape2D_ap0nd")
+debug_color = Color(0.2331, 0.63, 0.292635, 0.14902)
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]
