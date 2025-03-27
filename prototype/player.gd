@@ -53,13 +53,13 @@ func connect_children(parent):
 		
 		if child is Dink:
 			print('initialized dinks')
-			child.player_entered_dink_radius.connect(player_within_dink_radius)
-			child.player_left_dink_radius.connect(player_outside_dink_radius)
+			child.player_entered_item_radius.connect(player_within_dink_radius)
+			child.player_left_item_radius.connect(player_outside_dink_radius)
 		
 		if child is Grapple:
 			print('initialized grapples')
-			child.player_entered_grapple_radius.connect(player_within_grapple_radius)
-			child.player_left_grapple_radius.connect(player_outside_grapple_radius)
+			child.player_entered_item_radius.connect(player_within_grapple_radius)
+			child.player_left_item_radius.connect(player_outside_grapple_radius)
 		#
 		# Recursively check the children of each node
 		if child.has_method("get_children"):
