@@ -253,6 +253,10 @@ func perform_actions(input_axis):
 func item_vector(it: Item) -> Vector2:
 	return (it.global_position - global_position).normalized()
 
+func distance_to_item(it: Item) -> float:
+	var v: Vector2 = item_vector(it)
+	return sqrt((v.x * v.x) + (v.y * v.y))
+
 ## Grapple
 func handle_grapple(input_axis):
 	if grapple_target != null: # and not has_executed_grapple:
@@ -308,7 +312,7 @@ func player_within_dink_radius(dink):
 	#can_execute_dink = true
 	dink_target = dink
 	
-func player_outside_dink_radius():
+func player_outside_dink_radius(dink):
 	if print_action: print('player outside dink radius')
 	dink_target = null
 	has_executed_dink = false
