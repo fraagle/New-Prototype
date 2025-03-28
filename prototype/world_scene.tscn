@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://doqlwk5a8d6jj"]
 
-[ext_resource type="Script" path="res://prototype/world_scene.gd" id="1_mbr3j"]
+[ext_resource type="Script" uid="uid://kusg5rdpfelc" path="res://prototype/world_scene.gd" id="1_mbr3j"]
 [ext_resource type="Texture2D" uid="uid://l2vuj5o35heg" path="res://prototype/prototyping_tilemap.png" id="1_uevc0"]
-[ext_resource type="Script" path="res://prototype/camera.gd" id="2_kn57t"]
+[ext_resource type="Script" uid="uid://jwhtk8exeoes" path="res://prototype/camera.gd" id="2_kn57t"]
 [ext_resource type="PackedScene" uid="uid://w0s4ynlfeey5" path="res://prototype/player.tscn" id="3_y807j"]
 [ext_resource type="PackedScene" uid="uid://c0saeen2xcnxu" path="res://prototype/room.tscn" id="5_kwctl"]
 [ext_resource type="PackedScene" uid="uid://cvl5qll0fu6c7" path="res://prototype/platform.tscn" id="6_asccb"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bv4f7le2gfyw8"]
 
-[ext_resource type="Script" path="res://prototype/grapple.gd" id="1_irnnf"]
+[ext_resource type="Script" uid="uid://csmkrmeug2ile" path="res://prototype/grapple.gd" id="1_irnnf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_os3c8"]
 radius = 4.0
