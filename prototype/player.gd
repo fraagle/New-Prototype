@@ -11,6 +11,9 @@ class_name Player
 @onready var wall_jump_timer: Timer = $WallJumpTimer
 @onready var wall_slide_timer: Timer = $WallSlideTimer
 
+# The item the player is currently targeting/handling
+var item_target: Item
+
 ## variables
 var dink_target: Dink
 var can_execute_dink: bool = false
@@ -53,13 +56,13 @@ func connect_children(parent):
 		
 		if child is Dink:
 			print('initialized dinks')
-			child.player_entered_dink_radius.connect(player_within_dink_radius)
-			child.player_left_dink_radius.connect(player_outside_dink_radius)
+			child.player_entered_item_radius.connect(player_within_dink_radius)
+			child.player_left_item_radius.connect(player_outside_dink_radius)
 		
 		if child is Grapple:
 			print('initialized grapples')
-			child.player_entered_grapple_radius.connect(player_within_grapple_radius)
-			child.player_left_grapple_radius.connect(player_outside_grapple_radius)
+			child.player_entered_item_radius.connect(player_within_grapple_radius)
+			child.player_left_item_radius.connect(player_outside_grapple_radius)
 		#
 		# Recursively check the children of each node
 		if child.has_method("get_children"):
@@ -247,13 +250,18 @@ func perform_actions(input_axis):
 	handle_dink(input_axis)
 	handle_grapple(input_axis)
 
+func item_vector(it: Item) -> Vector2:
+	return (it.global_position - global_position).normalized()
 
+func distance_to_item(it: Item) -> float:
+	var v: Vector2 = item_vector(it)
+	return sqrt((v.x * v.x) + (v.y * v.y))
 
 ## Grapple
 func handle_grapple(input_axis):
 	if grapple_target != null: # and not has_executed_grapple:
 		# Updated with process!
-		grapple_direction = (grapple_target.global_position - global_position).normalized()
+		grapple_direction = item_vector(grapple_target)
 		
 		var player_detector = grapple_target.get_node("PlayerDetector/CollisionShape2D")
 		var radius = player_detector.shape.radius
@@ -283,7 +291,7 @@ func handle_dink(input_axis):
 	
 	if dink_target != null and not has_executed_dink:
 		# Updated with process!
-		dink_direction = (dink_target.global_position - global_position).normalized()
+		dink_direction = item_vector(dink_target)
 		
 		if Input.is_action_just_pressed('dink') and not is_on_floor() and not is_on_wall():
 			dink_input_axis = input_axis
@@ -304,7 +312,7 @@ func player_within_dink_radius(dink):
 	#can_execute_dink = true
 	dink_target = dink
 	
-func player_outside_dink_radius():
+func player_outside_dink_radius(dink):
 	if print_action: print('player outside dink radius')
 	dink_target = null
 	has_executed_dink = false

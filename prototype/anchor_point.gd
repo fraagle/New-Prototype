@@ -11,6 +11,15 @@ enum ItemType { NONE, DINK, GRAPPLE }
 @export_category("Type")
 @export var anchor_type: ItemType = ItemType.NONE
 
+func convert_item_to_item_type(it: Item) -> ItemType:
+	var itty = ItemType.NONE
+
+	if it is Dink:
+		itty = ItemType.DINK
+	if it is Grapple:
+		itty = ItemType.GRAPPLE
+
+	return itty
 
 signal player_entered_anchor_radius
 signal player_left_anchor_radius
